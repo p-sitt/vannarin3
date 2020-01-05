@@ -14,7 +14,7 @@
           <img src="{{ asset('/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a to="/profile" class="d-block"> {{ Auth::user()->name }} </a>
+          <router-link to="/profile" class="d-block"> {{ Auth::user()->name }} </router-link>
         </div>
       </div>
 
@@ -24,25 +24,25 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/home" class="nav-link {{ (request()->is('home')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-home"></i>
+            <router-link to="/dashboard" class="nav-link">
+              <i class="nav-icon fas fa-home blue"></i>
               <p>
                 หน้าหลัก
               </p>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-bell"></i>
+              <i class="nav-icon fas fa-bell orange"></i>
               <p>
                 การแจ้งเตือน
                 <span class="right badge badge-danger">ใหม่</span>
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview {{ (request()->is('plant-type')) ? 'menu-open' : '' }} {{ (request()->is('plant-type/create')) ? 'menu-open' : '' }} {{ (request()->is('plant')) ? 'menu-open' : '' }} {{ (request()->is('plant/create')) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ (request()->is('plant-type')) ? 'active' : '' }} {{ (request()->is('plant-type/create')) ? 'active' : '' }} {{ (request()->is('plant')) ? 'active' : '' }} {{ (request()->is('plant/create')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-seedling"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-seedling green"></i>
               <p>
                 ข้อมูลพืช 
                 <i class="right fas fa-angle-left"></i>
@@ -50,26 +50,26 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/plant-type/create" class="nav-link {{ (request()->is('plant-type/create')) ? 'active' : '' }}">
-                  <i class="fas fa-plus-square nav-icon"></i>
+                <a href="/plant-type/create" class="nav-link">
+                  <i class="fas fa-plus-square nav-icon cyan"></i>
                   <p>เพิ่มชนิดพืช</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/plant-type" class="nav-link {{ (request()->is('plant-type')) ? 'active' : '' }}">
-                  <i class="fas fa-file-alt nav-icon"></i>
+                <a href="/plant-type" class="nav-link ">
+                  <i class="fas fa-file-alt nav-icon green"></i>
                   <p>รายการชนิดพืช</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/plant/create" class="nav-link {{ (request()->is('plant/create')) ? 'active' : '' }}">
-                  <i class="fas fa-plus-square nav-icon"></i>
+                <a href="/plant/create" class="nav-link">
+                  <i class="fas fa-plus-square nav-icon cyan"></i>
                   <p>เพิ่มข้อมูลพืช</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/plant" class="nav-link {{ (request()->is('plant')) ? 'active' : '' }}">
-                  <i class="fas fa-file-alt nav-icon"></i>
+                <a href="/plant" class="nav-link">
+                  <i class="fas fa-file-alt nav-icon green"></i>
                   <p>แสดงข้อมูลพืชทั้งหมด</p>
                 </a>
               </li>
@@ -77,7 +77,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-stream"></i>
+              <i class="nav-icon fas fa-stream cyan"></i>
               <p>
                 แผนการปฏิบัติ
               </p>
@@ -85,23 +85,16 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-edit teal"></i>
               <p>
                 แบบบันทึก
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          
+           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                ข้อมูลพืช-สัตว์
-              </p>
-            </a>
-          </li>
-           <li class="nav-item has-treeview {{ (request()->is('water')) ? 'menu-open' : '' }} {{ (request()->is('waterstatus')) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ (request()->is('water')) ? 'active' : '' }} {{ (request()->is('waterstatus')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tint"></i>
+              <i class="nav-icon fas fa-tint blue"></i>
               <p>
                 ระบบให้น้ำอัตโนมัติ
                 <i class="right fas fa-angle-left"></i>
@@ -109,26 +102,34 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/water" class="nav-link {{ (request()->is('water')) ? 'active' : '' }}">
-                  <i class="fas fa-tools nav-icon"></i>
+                <a href="/water" class="nav-link">
+                  <i class="fas fa-tools nav-icon cyan"></i>
                   <p>ติดตั้งระบบ</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/waterstatus" class="nav-link {{ (request()->is('waterstatus')) ? 'active' : '' }}">
-                  <i class="fas fa-file-alt nav-icon"></i>
+                <a href="/waterstatus" class="nav-link">
+                  <i class="fas fa-file-alt nav-icon green"></i>
                   <p>หน้าแสดงผล</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+            <router-link to="/profile" class="nav-link">
+              <i class="nav-icon fas fa-user yellow"></i>
               <p>
                 ข้อมูลส่วนตัว
               </p>
-            </a>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/users" class="nav-link">
+            <i class="nav-icon fas fa-users orange"></i>
+              <p>
+                ผู้ใช้งาน
+              </p>
+            </router-link>
           </li>
            <li class="nav-item">
             <a href="#" class="nav-link">
@@ -142,7 +143,7 @@
             <a class="dropdown-item nav-link" href="{{ route('logout') }}"
               onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-sign-out-alt"></i> 
+              <i class="nav-icon fas fa-power-off red"></i> 
                ออกจากระบบ
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -46,8 +46,31 @@
   <!-- Main Sidebar Container -->
     @include('layouts.sidebar')
 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+              
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content-header -->
 
-    @yield('content')  
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <router-view></router-view>
+            <vue-progress-bar></vue-progress-bar>
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
 
 
   <!-- Main Footer -->
