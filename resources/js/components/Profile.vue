@@ -1,17 +1,91 @@
-<template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Profile Component</div>
+<style>
+    .widget-user-header{
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .widget-user .widget-user-header{
+        height: 250px;
+    }
+</style>
 
-                    <div class="card-body">
-                        I'm an example component.
+<template>
+    <section class="content">
+            <div class="col-md-12 ">
+            <div class="card card-widget widget-user">
+              <!-- Add the bg color to the header using any of the bg-* classes -->
+              <div class="widget-user-header text-white" style="background-image:url('./img/dragonfly-2551460.jpg')">
+                <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
+                <h5 class="widget-user-desc text-right">Web Designer</h5>
+              </div>
+              <div class="widget-user-image">
+                <img class="img-circle" src="user-profile.jpg" alt="User Avatar">
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 class="description-header">3,200</h5>
+                      <span class="description-text">SALES</span>
                     </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 class="description-header">13,000</h5>
+                      <span class="description-text">FOLLOWERS</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4">
+                    <div class="description-block">
+                      <h5 class="description-header">35</h5>
+                      <span class="description-text">PRODUCTS</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
                 </div>
+                <!-- /.row -->
+              </div>
             </div>
-        </div>
-    </div>
+
+           
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">ข้อมูลผู้ใช้งาน</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">แก้ไขข้อมูล</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="activity">
+                     <h1>User information will show here</h1>
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="settings">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="ชื่อ" class="form-control">
+                        </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+        
+
+
+            </div>
+        
+    </section>
 </template>
 
 <script>
