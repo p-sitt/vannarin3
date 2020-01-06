@@ -7,7 +7,7 @@
                 <h3 class="card-title">ตารางผู้ใช้งาน</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addNew"> 
+                    <button class="btn btn-success" @click="newModal"> 
                         <i class="fas fa-user-plus fa-fw"></i> 
                         เพิ่มผู้ใช้ 
                     </button>
@@ -37,7 +37,7 @@
                         <td>{{user.type}}</td>
                         <td>{{user.created_at | myDate}}</td>
                         <td> 
-                          <a href="#" class="btn btn-primary">
+                          <a href="#" class="btn btn-primary" @click="editModal(user)">
                               <i class="fas fa-edit"></i>
                               แก้ไข
                           </a>
@@ -60,12 +60,15 @@
 
         <!-- Modal -->
         <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
-            <form @submit.prevent="createUser">
+        <form @submit.prevent="editmode ? updateUser() : createUser()">
         <div class="modal-dialog modal-dialog-centered" role="document">
             
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title" id="addNewLabel"><i class="fas fa-user-plus fa-fw"></i> เพิ่มผู้ใช้ใหม่</h5>
+                        <h5 class="modal-title" v-show="editmode" id="addNewLabel">
+                            <i class="fas fa-edit fa-fw"></i>แก้ไขข้อมูลผู้ใช้</h5>
+                        <h5 class="modal-title" v-show="!editmode" id="addNewLabel">
+                            <i class="fas fa-user-plus fa-fw"></i> เพิ่มผู้ใช้ใหม่</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -98,7 +101,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button>
+                        <button type="submit" v-show="editmode" class="btn btn-primary">แก้ไขข้อมูล</button>
+                        <button type="submit" v-show="!editmode" class="btn btn-success">เพิ่มข้อมูล</button>
                     </div>
                 </div>
             
@@ -112,8 +116,10 @@
     export default {
         data(){
             return{
+                editmode: false,
                 users : {},
                  form: new Form({
+                     id:'',
                      name: '',
                      type: '',
                      email: '',
@@ -122,6 +128,34 @@
             }
         },
         methods:{
+            updateUser(){
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                .then(() => {
+                    $('#addNew').modal('hide');
+                    Swal.fire(
+                                'แก้ไขข้อมูลเรียบร้อย!',
+                                'ข้อมูลถูกแก้ไขแล้ว.',
+                                'success'
+                                )
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch(() => {
+                    this.$Progress.fail();
+                });
+            },
+            editModal(user){
+                this.editmode = true;
+                this.form.reset();
+                $('#addNew').modal('show');
+                this.form.fill(user);
+            },
+            newModal(){
+                this.editmode = false;
+                this.form.reset();
+                $('#addNew').modal('show');
+            },
             deleteUser(id){
                 Swal.fire({
                 title: 'ยืนยันการลบข้อมูล?',
@@ -167,7 +201,7 @@
                     this.$Progress.finish();
                 })
                 .catch(()=>{
-
+                    this.$Progress.fail();
                 });
             }
         },
