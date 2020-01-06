@@ -2064,13 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -59349,19 +59342,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.email))]),
                     _vm._v(" "),
-                    _c("td", [
-                      user.type == 0
-                        ? _c("div", [
-                            _vm._v(
-                              "\n                            ผูู้ใช้\n                        "
-                            )
-                          ])
-                        : _c("div", [
-                            _vm._v(
-                              "\n                            ผู้ดูแลระบบ\n                        "
-                            )
-                          ])
-                    ]),
+                    _c("td", [_vm._v(_vm._s(user.type))]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(_vm._s(_vm._f("myDate")(user.created_at)))
@@ -59519,11 +59500,11 @@ var render = function() {
                               _vm._v("ประเภทผูู้ใช้")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "0" } }, [
+                            _c("option", { attrs: { value: "user" } }, [
                               _vm._v("ผูู้ใช้")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
+                            _c("option", { attrs: { value: "admin" } }, [
                               _vm._v("ผู้ดูแลระบบ")
                             ])
                           ]
@@ -75243,8 +75224,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\phpProject\vannarin3\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\phpProject\vannarin3\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

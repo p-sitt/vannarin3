@@ -37,6 +37,7 @@
                                     </span>
                                 @enderror
                             </div>
+                            <input id="type" type="hidden"  name="type" value="user">
                         </div>
 
                         <div class="form-group row">

@@ -34,14 +34,7 @@
                         <td>{{user.id}}</td>
                         <td>{{user.name | upText}}</td>
                         <td>{{user.email}}</td>
-                        <td>
-                            <div v-if="user.type == 0">
-                                ผูู้ใช้
-                            </div>
-                            <div v-else>
-                                ผู้ดูแลระบบ
-                            </div>
-                        </td>
+                        <td>{{user.type}}</td>
                         <td>{{user.created_at | myDate}}</td>
                         <td> 
                           <a href="#" class="btn btn-primary">
@@ -87,8 +80,8 @@
                             <select v-model="form.type" type="text" name="type" 
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
                                 <option value="">ประเภทผูู้ใช้</option>
-                                <option value="0">ผูู้ใช้</option>
-                                <option value="1">ผู้ดูแลระบบ</option>
+                                <option value="user">ผูู้ใช้</option>
+                                <option value="admin">ผู้ดูแลระบบ</option>
                             </select>
                             <has-error :form="form" field="type"></has-error>
                         </div>
