@@ -69,15 +69,48 @@
                   <div class="tab-pane" id="settings">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="ชื่อ" class="form-control">
+                            <label for="name">ชื่อ</label>
+                            <input type="text" v-model="form.name" id="name" name="name" placeholder="ชื่อ" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="email">อีเมล์</label>
+                            <input type="text" v-model="form.email" id="email" name="email" placeholder="อีเมล์" class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label for="address">ที่อยู่</label>
+                        <textarea class="form-control" v-model="form.address" rows="2" id="address" name="address" placeholder="ที่อยู่ ..."></textarea>
+                      </div>
+                      <div class="form-group">
+                            <label for="zipcode">รหัสไปรษณีย์</label>
+                            <input type="text" v-model="form.zipcode" id="zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">ที่ตั้ง</label>
+                            <input type="text" v-model="form.location" id="location" name="location" placeholder="ที่ตั้ง" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="area">พื้นที่</label>
+                            <input type="text" v-model="form.area" id="area" name="area" placeholder="พื้นที่" class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label for="image">ภาพโปรไฟล์</label>
+                        <div class="custom-file">
+                          <input type="file" @change="updateProfile" class="form-control" id="image" name="image">
+                          <label class="custom-file-label" for="image">เลือกไฟล์</label>
+                        </div>
+                        <div class="form-group">
+                          <label for="image"></label>
+                            <button type="submit" @click.prevent="updateInfo" class="btn btn-block btn-primary">แก้ไขข้อมูล</button>
+                        </div>
+                        
+                  </div>
                     </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->
+
             </div>
             <!-- /.nav-tabs-custom -->
         
@@ -90,8 +123,49 @@
 
 <script>
     export default {
+        data(){
+            return{
+              form: new Form({
+                     id:'',
+                     name: '',
+                     type: '',
+                     email: '',
+                     password: '',
+                     location:'',
+                     zipcode:'',
+                     area:'',
+                     image:''
+                 })    
+            }
+        },
+        methods:{
+            updateInfo(){
+              this.$Progress.start();
+                this.form.put('api/profile/')
+                .then(()=>{
+
+                })
+                .catch(()=>{});
+            },
+            updateProfile(e){
+                //console.log('Uploading')
+                let file = e.target.files[0];
+                //console.log(file);
+                let reader = new FileReader();
+                
+                reader.onloadend =(file) =>{
+                  this.form.image = reader.result;
+                }
+
+                reader.readAsDataURL(file);
+            }
+        },
         mounted() {
             console.log('Component mounted.')
+        },
+        
+        created(){
+          axios.get('api/profile').then(({ data }) => (this.form.fill(data)));  
         }
     }
 </script>
