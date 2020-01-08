@@ -2073,6 +2073,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2098,13 +2133,22 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       //console.log('Uploading')
-      var file = e.target.files[0]; //console.log(file);
-
+      var file = e.target.files[0];
+      console.log(file);
       var reader = new FileReader();
 
-      reader.onloadend = function (file) {
-        _this.form.image = reader.result;
-      };
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          _this.form.image = reader.result;
+        };
+      } else {
+        Swal.fire({
+          type: 'error',
+          icon: 'warning',
+          title: 'Oops',
+          text: 'ไฟล์ภาพมีขนาดใหญ่เกินไป ขนาดภาพไม่ควรเกิน 2 MB'
+        });
+      }
 
       reader.readAsDataURL(file);
     }
@@ -2120,6 +2164,39 @@ __webpack_require__.r(__webpack_exports__);
       return _this2.form.fill(data);
     });
   }
+});
+$(document).ready(function () {
+  $(document).on('change', '.btn-file :file', function () {
+    var input = $(this),
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [label]);
+  });
+  $('.btn-file :file').on('fileselect', function (event, label) {
+    var input = $(this).parents('.input-group').find(':text'),
+        log = label;
+
+    if (input.length) {
+      input.val(log);
+    } else {
+      if (log) alert(log);
+    }
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img-upload').attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#imgInp").change(function () {
+    readURL(this);
+  });
 });
 
 /***/ }),
@@ -7687,7 +7764,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.widget-user-header{\n    background-position: center center;\n    background-repeat: no-repeat;\n    background-size: cover;\n}\n.widget-user .widget-user-header{\n    height: 250px;\n}\n", ""]);
+exports.push([module.i, "\n.widget-user-header{\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n}\n.widget-user .widget-user-header{\n        height: 250px;\n}\n#img-upload{\n      max-height: 200px;\n}\n.btn-file {\n    position: relative;\n    overflow: hidden;\n}\n.btn-file input[type=file] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    min-width: 100%;\n    min-height: 100%;\n    font-size: 100px;\n    text-align: right;\n    filter: alpha(opacity=0);\n    opacity: 0;\n    outline: none;\n    background: white;\n    cursor: inherit;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -61329,7 +61406,25 @@ var render = function() {
                         attrs: { for: "image" }
                       },
                       [_vm._v("เลือกไฟล์")]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("img", { attrs: { id: "img-upload" } })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Upload Image")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", readonly: "" },
+                        on: { change: _vm.updateProfile }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("img", { attrs: { id: "img-upload" } })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
@@ -61467,6 +61562,17 @@ var staticRenderFns = [
       { staticClass: "tab-pane active", attrs: { id: "activity" } },
       [_c("h1", [_vm._v("User information will show here")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c("span", { staticClass: "btn btn-default btn-file" }, [
+        _vm._v("\n                                  Browse… "),
+        _c("input", { attrs: { type: "file", id: "imgInp" } })
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -78943,8 +79049,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\phpProject\vannarin3\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\phpProject\vannarin3\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

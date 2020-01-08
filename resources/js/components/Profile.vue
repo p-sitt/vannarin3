@@ -7,6 +7,28 @@
     .widget-user .widget-user-header{
         height: 250px;
     }
+    #img-upload{
+      max-height: 200px;
+    }
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 </style>
 
 <template>
@@ -97,7 +119,20 @@
                         <div class="custom-file">
                           <input type="file" @change="updateProfile" class="form-control" id="image" name="image">
                           <label class="custom-file-label" for="image">เลือกไฟล์</label>
+                          <img id='img-upload' />
                         </div>
+                        <div class="form-group">
+                          <label>Upload Image</label>
+                          <div class="input-group">
+                              <span class="input-group-btn">
+                                  <span class="btn btn-default btn-file">
+                                      Browse… <input type="file" id="imgInp">
+                                  </span>
+                              </span>
+                              <input type="text" @change="updateProfile" class="form-control" readonly>
+                          </div>
+                          <img id='img-upload'/>
+                      </div>
                         <div class="form-group">
                           <label for="image"></label>
                             <button type="submit" @click.prevent="updateInfo" class="btn btn-block btn-primary">แก้ไขข้อมูล</button>
@@ -150,13 +185,26 @@
             updateProfile(e){
                 //console.log('Uploading')
                 let file = e.target.files[0];
-                //console.log(file);
+                console.log(file);
+
                 let reader = new FileReader();
                 
-                reader.onloadend =(file) =>{
-                  this.form.image = reader.result;
-                }
+                if(file['size'] < 2111775){
 
+                  reader.onloadend =(file) =>{
+                    
+                    this.form.image = reader.result;
+
+                  }
+                }else{
+
+                   Swal.fire({
+                      type: 'error',
+                      icon: 'warning',
+                      title: 'Oops',
+                      text: 'ไฟล์ภาพมีขนาดใหญ่เกินไป ขนาดภาพไม่ควรเกิน 2 MB',
+                    })
+                }
                 reader.readAsDataURL(file);
             }
         },
@@ -168,4 +216,40 @@
           axios.get('api/profile').then(({ data }) => (this.form.fill(data)));  
         }
     }
+
+    $(document).ready( function() {
+        $(document).on('change', '.btn-file :file', function() {
+      var input = $(this),
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+      input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		    
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
 </script>

@@ -78,7 +78,10 @@ class UserController extends Controller
         //return ['message' => 'success'];
         if($request->image){
             
-            $name = name.'.'.explode('/',explode(':',substr($request->image,0,strpos($request->image,';')))[1])[1];
+            $name = time().'.'.explode('/', explode(':', substr($request->image, 0, strpos($request->image,';')))[1])[1];
+            
+           
+          \Image::make($request->image)->save(public_path('img/profile/').$name);
         }
     }
     
