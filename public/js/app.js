@@ -2101,13 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2126,11 +2119,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateInfo: function updateInfo() {
+      var _this = this;
+
       this.$Progress.start();
-      this.form.put('api/profile/').then(function () {})["catch"](function () {});
+      this.form.put('api/profile/').then(function () {
+        _this.$Progress.finish();
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
     },
     updateProfile: function updateProfile(e) {
-      var _this = this;
+      var _this2 = this;
 
       //console.log('Uploading')
       var file = e.target.files[0];
@@ -2139,7 +2138,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (file['size'] < 2111775) {
         reader.onloadend = function (file) {
-          _this.form.image = reader.result;
+          _this2.form.image = reader.result;
         };
       } else {
         Swal.fire({
@@ -2157,11 +2156,11 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get('api/profile').then(function (_ref) {
       var data = _ref.data;
-      return _this2.form.fill(data);
+      return _this3.form.fill(data);
     });
   }
 });
@@ -2194,7 +2193,7 @@ $(document).ready(function () {
     }
   }
 
-  $("#imgInp").change(function () {
+  $("#image").change(function () {
     readURL(this);
   });
 });
@@ -7764,7 +7763,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.widget-user-header{\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n}\n.widget-user .widget-user-header{\n        height: 250px;\n}\n#img-upload{\n      max-height: 200px;\n}\n.btn-file {\n    position: relative;\n    overflow: hidden;\n}\n.btn-file input[type=file] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    min-width: 100%;\n    min-height: 100%;\n    font-size: 100px;\n    text-align: right;\n    filter: alpha(opacity=0);\n    opacity: 0;\n    outline: none;\n    background: white;\n    cursor: inherit;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.widget-user-header{\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n}\n.widget-user .widget-user-header{\n        height: 250px;\n}\n#img-upload{\n      max-height: 200px;\n      float: left;\n}\n.btn-file {\n    position: relative;\n    overflow: hidden;\n}\n.btn-file input[type=file] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    min-width: 100%;\n    min-height: 100%;\n    font-size: 100px;\n    text-align: right;\n    filter: alpha(opacity=0);\n    opacity: 0;\n    outline: none;\n    background: white;\n    cursor: inherit;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -61399,32 +61398,7 @@ var render = function() {
                       on: { change: _vm.updateProfile }
                     }),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-file-label",
-                        attrs: { for: "image" }
-                      },
-                      [_vm._v("เลือกไฟล์")]
-                    ),
-                    _vm._v(" "),
-                    _c("img", { attrs: { id: "img-upload" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Upload Image")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", readonly: "" },
-                        on: { change: _vm.updateProfile }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("img", { attrs: { id: "img-upload" } })
+                    _vm._m(3)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
@@ -61567,11 +61541,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-btn" }, [
-      _c("span", { staticClass: "btn btn-default btn-file" }, [
-        _vm._v("\n                                  Browse… "),
-        _c("input", { attrs: { type: "file", id: "imgInp" } })
-      ])
+    return _c("div", { staticClass: "info-box" }, [
+      _c("div", { staticClass: "info-box-content" }, [
+        _c("img", { attrs: { id: "img-upload", src: "" } })
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("ขนาดไฟล์ภาพไม่เกิน 2MB")])
     ])
   }
 ]
@@ -61655,12 +61630,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _c("i", { staticClass: "fas fa-edit" }),
-                          _vm._v(
-                            "\n                          แก้ไข\n                      "
-                          )
-                        ]
+                        [_c("i", { staticClass: "fas fa-edit" })]
                       ),
                       _vm._v(
                         "\n                      /\n                      "
@@ -61676,12 +61646,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _c("i", { staticClass: "fas fa-trash" }),
-                          _vm._v(
-                            "\n                          ลบ\n                      "
-                          )
-                        ]
+                        [_c("i", { staticClass: "fas fa-trash" })]
                       )
                     ])
                   ])
@@ -79049,8 +79014,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\phpProject\vannarin3\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\phpProject\vannarin3\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

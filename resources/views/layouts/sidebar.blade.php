@@ -25,26 +25,26 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-home blue"></i>
+              <i class="fas fa-home blue fa-2x"></i>
               <p>
-                หน้าหลัก
+                 &nbsp หน้าหลัก
               </p>
             </router-link>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-bell orange"></i>
+              <i class="fas fa-bell fa-2x orange"></i>
               <p>
-                การแจ้งเตือน
+                 &nbsp การแจ้งเตือน
                 <span class="right badge badge-danger">ใหม่</span>
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-seedling green"></i>
+              <i class="fas fa-seedling fa-2x green"></i>
               <p>
-                ข้อมูลพืช 
+                 &nbsp ข้อมูลพืช 
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -52,51 +52,51 @@
               <li class="nav-item">
                 <a href="/plant-type/create" class="nav-link">
                   <i class="fas fa-plus-square nav-icon cyan"></i>
-                  <p>เพิ่มชนิดพืช</p>
+                  <p>&nbsp เพิ่มชนิดพืช</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/plant-type" class="nav-link ">
                   <i class="fas fa-file-alt nav-icon green"></i>
-                  <p>รายการชนิดพืช</p>
+                  <p>&nbsp รายการชนิดพืช</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/plant/create" class="nav-link">
                   <i class="fas fa-plus-square nav-icon cyan"></i>
-                  <p>เพิ่มข้อมูลพืช</p>
+                  <p>&nbsp เพิ่มข้อมูลพืช</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/plant" class="nav-link">
                   <i class="fas fa-file-alt nav-icon green"></i>
-                  <p>แสดงข้อมูลพืชทั้งหมด</p>
+                  <p>&nbsp แสดงข้อมูลพืชทั้งหมด</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-stream cyan"></i>
+              <i class="fa-2x fas fa-stream cyan"></i>
               <p>
-                แผนการปฏิบัติ
+                &nbsp แผนการปฏิบัติ
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit teal"></i>
+              <i class="fa-2x fas fa-edit teal"></i>
               <p>
-                แบบบันทึก
+                &nbsp แบบบันทึก
               </p>
             </a>
           </li>
           
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tint blue"></i>
+              <i class="fa-2x fas fa-tint blue"></i>
               <p>
-                ระบบให้น้ำอัตโนมัติ
+                &nbsp ระบบให้น้ำอัตโนมัติ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -104,46 +104,46 @@
               <li class="nav-item">
                 <a href="/water" class="nav-link">
                   <i class="fas fa-tools nav-icon cyan"></i>
-                  <p>ติดตั้งระบบ</p>
+                  <p>&nbsp ติดตั้งระบบ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/waterstatus" class="nav-link">
                   <i class="fas fa-file-alt nav-icon green"></i>
-                  <p>หน้าแสดงผล</p>
+                  <p>&nbsp หน้าแสดงผล</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
-              <i class="nav-icon fas fa-user yellow"></i>
+              <i class="fa-2x fas fa-user yellow"></i>
               <p>
-                ข้อมูลส่วนตัว
+                &nbsp ข้อมูลส่วนตัว
               </p>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/users" class="nav-link">
-            <i class="nav-icon fas fa-users orange"></i>
+            <i class="fa-2x fas fa-users orange"></i>
               <p>
-                ผู้ใช้งาน
+                &nbsp ผู้ใช้งาน
               </p>
             </router-link>
           </li>
            <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="fa-2x fas fa-cog"></i>
               <p>
-                ตั้งค่า
+               &nbsp  ตั้งค่า
               </p>
             </a>
           </li>
           <li class="nav-item">
             <router-link to="developer" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="fa-2x fas fa-cog"></i>
               <p>
-                Developer
+                &nbsp Developer
               </p>
             </router-link>
           </li>
@@ -151,8 +151,8 @@
             <a class="dropdown-item nav-link" href="{{ route('logout') }}"
               onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-power-off red"></i> 
-               ออกจากระบบ
+              <i class="fa-2x  fas fa-power-off red"></i> 
+               <p>&nbsp ออกจากระบบ</p>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

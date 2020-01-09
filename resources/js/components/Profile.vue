@@ -9,6 +9,7 @@
     }
     #img-upload{
       max-height: 200px;
+      float: left;
     }
     .btn-file {
     position: relative;
@@ -118,21 +119,13 @@
                         <label for="image">ภาพโปรไฟล์</label>
                         <div class="custom-file">
                           <input type="file" @change="updateProfile" class="form-control" id="image" name="image">
-                          <label class="custom-file-label" for="image">เลือกไฟล์</label>
-                          <img id='img-upload' />
+                          <div class="info-box">
+                            <div class="info-box-content">
+                                <img id='img-upload' src="" />
+                            </div>
+                            <span>ขนาดไฟล์ภาพไม่เกิน 2MB</span>
                         </div>
-                        <div class="form-group">
-                          <label>Upload Image</label>
-                          <div class="input-group">
-                              <span class="input-group-btn">
-                                  <span class="btn btn-default btn-file">
-                                      Browse… <input type="file" id="imgInp">
-                                  </span>
-                              </span>
-                              <input type="text" @change="updateProfile" class="form-control" readonly>
-                          </div>
-                          <img id='img-upload'/>
-                      </div>
+                        </div>
                         <div class="form-group">
                           <label for="image"></label>
                             <button type="submit" @click.prevent="updateInfo" class="btn btn-block btn-primary">แก้ไขข้อมูล</button>
@@ -179,8 +172,11 @@
                 this.form.put('api/profile/')
                 .then(()=>{
 
+                    this.$Progress.finish();
                 })
-                .catch(()=>{});
+                .catch(()=>{
+                   this.$Progress.fail();
+                });
             },
             updateProfile(e){
                 //console.log('Uploading')
@@ -248,7 +244,7 @@
 		    }
 		}
 
-		$("#imgInp").change(function(){
+		$("#image").change(function(){
 		    readURL(this);
 		}); 	
 	});

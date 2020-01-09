@@ -39,12 +39,12 @@
                         <td> 
                           <a href="#" class="btn btn-primary" @click="editModal(user)">
                               <i class="fas fa-edit"></i>
-                              แก้ไข
+                              
                           </a>
                           /
                           <a href="#" class="btn btn-danger" @click="deleteUser(user.id)">
                               <i class="fas fa-trash"></i>
-                              ลบ
+                        
                           </a>
 
                       </td>
