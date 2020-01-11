@@ -2095,12 +2095,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2114,11 +2108,15 @@ __webpack_require__.r(__webpack_exports__);
         zipcode: '',
         location: '',
         area: '',
-        image: ''
+        photo: ''
       })
     };
   },
   methods: {
+    getProfilePhoto: function getProfilePhoto() {
+      var photo = this.form.photo.length > 200 ? this.form.photo : "img/profile/" + this.form.photo;
+      return photo;
+    },
     updateInfo: function updateInfo() {
       var _this = this;
 
@@ -2139,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (file['size'] < 2111775) {
         reader.onloadend = function (file) {
-          _this2.form.image = reader.result;
+          _this2.form.photo = reader.result;
         };
       } else {
         Swal.fire({
@@ -2164,40 +2162,6 @@ __webpack_require__.r(__webpack_exports__);
       return _this3.form.fill(data);
     });
   }
-});
-$(document).ready(function () {
-  $(document).on('change', '.btn-file :file', function () {
-    var input = $(this),
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [label]);
-  });
-  $('.btn-file :file').on('fileselect', function (event, label) {
-    var input = $(this).parents('.input-group').find(':text'),
-        log = label;
-
-    if (input.length) {
-      input.val(log);
-    } else {
-      if (log) alert(log);
-    }
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#img-upload').attr('src', e.target.result);
-        $('#profile-img').attr('src', e.target.result);
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $("#image").change(function () {
-    readURL(this);
-  });
 });
 
 /***/ }),
@@ -7766,7 +7730,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.widget-user-header{\n        background-position: center center;\n        background-repeat: no-repeat;\n        background-size: cover;\n}\n.widget-user .widget-user-header{\n        height: 250px;\n}\n#img-upload{\n      max-height: 200px;\n      float: left;\n}\n.btn-file {\n    position: relative;\n    overflow: hidden;\n}\n.btn-file input[type=file] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    min-width: 100%;\n    min-height: 100%;\n    font-size: 100px;\n    text-align: right;\n    filter: alpha(opacity=0);\n    opacity: 0;\n    outline: none;\n    background: white;\n    cursor: inherit;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.widget-user-header{\n      background-position: center center;\n      background-repeat: no-repeat;\n      background-size: cover;\n}\n.widget-user .widget-user-header{\n      height: 250px;\n}\n.btn-file {\n  position: relative;\n  overflow: hidden;\n}\n\n", ""]);
 
 // exports
 
@@ -61186,19 +61150,75 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "content" }, [
     _c("div", { staticClass: "col-md-12 " }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card card-widget widget-user" }, [
+        _c(
+          "div",
+          {
+            staticClass: "widget-user-header text-white",
+            staticStyle: {
+              "background-image": "url('./img/dragonfly-2551460.jpg')"
+            }
+          },
+          [
+            _c("h3", { staticClass: "widget-user-username text-left" }, [
+              _vm._v(_vm._s(this.form.name))
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "widget-user-desc text-left" }, [
+              _vm._v(_vm._s(this.form.type))
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "widget-user-image" }, [
+          _c("img", {
+            staticClass: "img-circle",
+            attrs: {
+              id: "profile-img",
+              src: _vm.getProfilePhoto(),
+              alt: "User Avatar"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "tab-content" }, [
-            _vm._m(2),
+            _c(
+              "div",
+              { staticClass: "tab-pane active", attrs: { id: "activity" } },
+              [
+                _c("h4", [_vm._v("ชื่อ : " + _vm._s(this.form.name))]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("อีเมล์ : " + _vm._s(this.form.email))]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("ประเภทผู้ใช้ : " + _vm._s(this.form.type))]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("ที่อยู่ : " + _vm._s(this.form.address))]),
+                _vm._v(" "),
+                _c("h4", [
+                  _vm._v("รหัสไปรษณีย์ : " + _vm._s(this.form.zipcode))
+                ]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("ที่ตั้ง : " + _vm._s(this.form.location))]),
+                _vm._v(" "),
+                _c("h4", [_vm._v("พื้นที่ : " + _vm._s(this.form.area))])
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "tab-pane", attrs: { id: "settings" } }, [
               _c("form", { staticClass: "form-horizontal" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("ชื่อ")]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "name" } },
+                    [_vm._v("ชื่อ")]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61229,7 +61249,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "email" } }, [_vm._v("อีเมล์")]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "email" } },
+                    [_vm._v("อีเมล์")]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61259,10 +61283,59 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        attrs: { for: "password" }
+                      },
+                      [_vm._v("รหัสผ่าน (ปล่อยว่างถ้าไม่ต้องการเปลี่ยน)")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password,
+                          expression: "form.password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.form.errors.has("password") },
+                      attrs: {
+                        type: "password",
+                        id: "password",
+                        placeholder: "รหัสผ่าน"
+                      },
+                      domProps: { value: _vm.form.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "password", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "password" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "address" } }, [
-                    _vm._v("ที่อยู่")
-                  ]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "address" } },
+                    [_vm._v("ที่อยู่")]
+                  ),
                   _vm._v(" "),
                   _c("textarea", {
                     directives: [
@@ -61293,9 +61366,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "zipcode" } }, [
-                    _vm._v("รหัสไปรษณีย์")
-                  ]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "zipcode" } },
+                    [_vm._v("รหัสไปรษณีย์")]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61326,9 +61401,14 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "location" } }, [
-                    _vm._v("ที่ตั้ง")
-                  ]),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "control-label",
+                      attrs: { for: "location" }
+                    },
+                    [_vm._v("ที่ตั้ง")]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61359,7 +61439,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "area" } }, [_vm._v("พื้นที่")]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "area" } },
+                    [_vm._v("พื้นที่")]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61390,27 +61474,27 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "image" } }, [
-                    _vm._v("ภาพโปรไฟล์")
-                  ]),
+                  _c(
+                    "label",
+                    { staticClass: "control-label", attrs: { for: "photo" } },
+                    [_vm._v("ภาพโปรไฟล์")]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "custom-file" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
                     _c("input", {
-                      staticClass: "form-control",
-                      attrs: { type: "file", id: "image", name: "image" },
+                      staticClass: "form-input",
+                      attrs: { type: "file", name: "photo" },
                       on: { change: _vm.updateProfile }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(3)
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "image" } }),
-                    _vm._v(" "),
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "col-sm-offset-2 col-sm-12" }, [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-block btn-primary",
+                        staticClass: "btn btn-success",
                         attrs: { type: "submit" },
                         on: {
                           click: function($event) {
@@ -61419,7 +61503,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("แก้ไขข้อมูล")]
+                      [_vm._v("Update")]
                     )
                   ])
                 ])
@@ -61436,64 +61520,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card card-widget widget-user" }, [
-      _c(
-        "div",
-        {
-          staticClass: "widget-user-header text-white",
-          staticStyle: {
-            "background-image": "url('./img/dragonfly-2551460.jpg')"
-          }
-        },
-        [
-          _c("h3", { staticClass: "widget-user-username text-right" }, [
-            _vm._v("Elizabeth Pierce")
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "widget-user-desc text-right" }, [
-            _vm._v("Web Designer")
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-4 border-right" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("3,200")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [_vm._v("SALES")])
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "widget-user-image" }, [
-        _c("img", {
-          staticClass: "img-circle",
-          attrs: { id: "profile-img", src: "", alt: "User Avatar" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-footer" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v("3,200")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [_vm._v("SALES")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4 border-right" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("13,000")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [
+              _vm._v("FOLLOWERS")
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v("13,000")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("FOLLOWERS")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("PRODUCTS")
-              ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("div", { staticClass: "description-block" }, [
+            _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "description-text" }, [
+              _vm._v("PRODUCTS")
             ])
           ])
         ])
@@ -61528,28 +61580,6 @@ var staticRenderFns = [
           )
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "tab-pane active", attrs: { id: "activity" } },
-      [_c("h1", [_vm._v("User information will show here")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "info-box" }, [
-      _c("div", { staticClass: "info-box-content" }, [
-        _c("img", { attrs: { id: "img-upload", src: "" } })
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("ขนาดไฟล์ภาพไม่เกิน 2MB")])
     ])
   }
 ]

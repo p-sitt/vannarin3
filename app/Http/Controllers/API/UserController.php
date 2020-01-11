@@ -75,15 +75,34 @@ class UserController extends Controller
     {
         
         $user = auth('api')->user();
+
+        $this->validate($request,[
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'password' => 'sometimes|required|min:8'
+        ]);
+
         $currentPhoto = $user->photo;
         
-        if($request->image != $currentPhoto){
-            $name = time().'.'.explode('/', explode(':',substr($request->image,0,strpos($request->image,';')))[1])[1];
-            \Image::make($request->image)->save(public_path('img/profile/').$name);
-            $request->merge(['image' => $name]);
+        if($request->photo != $currentPhoto){
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+            \Image::make($request->photo)->save(public_path('img/profile/').$name);
+            $request->merge(['photo' => $name]);
+
+            $userPhoto = public_path('img/profile/').$currentPhoto;
+            if(file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
+
+        }
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
         }
         
         $user->update($request->all());
+
         return ['message' => 'Update success'];
 
     }
@@ -110,6 +129,10 @@ class UserController extends Controller
             'type' => 'required|string|max:191',
             'password' => 'sometimes|min:8'
         ]);
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
 
         $user->update($request->all());
 

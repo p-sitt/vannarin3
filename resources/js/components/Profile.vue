@@ -7,29 +7,11 @@
     .widget-user .widget-user-header{
         height: 250px;
     }
-    #img-upload{
-      max-height: 200px;
-      float: left;
-    }
     .btn-file {
     position: relative;
     overflow: hidden;
-}
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
+  }
+
 </style>
 
 <template>
@@ -38,11 +20,11 @@
             <div class="card card-widget widget-user">
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header text-white" style="background-image:url('./img/dragonfly-2551460.jpg')">
-                <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                <h5 class="widget-user-desc text-right">Web Designer</h5>
+                <h3 class="widget-user-username text-left">{{this.form.name}}</h3>
+                <h5 class="widget-user-desc text-left">{{this.form.type}}</h5>
               </div>
               <div class="widget-user-image">
-                <img class="img-circle" id="profile-img" src="" alt="User Avatar">
+                <img class="img-circle" id="profile-img" :src="getProfilePhoto()" alt="User Avatar">
               </div>
               <div class="card-footer">
                 <div class="row">
@@ -86,52 +68,64 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="tab-pane active" id="activity">
-                     <h1>User information will show here</h1>
+                     <h4>ชื่อ : {{this.form.name}}</h4>
+                     <h4>อีเมล์ : {{this.form.email}}</h4>
+                     <h4>ประเภทผู้ใช้ : {{this.form.type}}</h4>
+                     <h4>ที่อยู่ : {{this.form.address}}</h4>
+                     <h4>รหัสไปรษณีย์ : {{this.form.zipcode}}</h4>
+                     <h4>ที่ตั้ง : {{this.form.location}}</h4>
+                     <h4>พื้นที่ : {{this.form.area}}</h4>
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="settings">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="name">ชื่อ</label>
+                            <label for="name" class="control-label">ชื่อ</label>
                             <input type="text" v-model="form.name" id="name" name="name" placeholder="ชื่อ" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="email">อีเมล์</label>
+                            <label for="email" class="control-label">อีเมล์</label>
                             <input type="text" v-model="form.email" id="email" name="email" placeholder="อีเมล์" class="form-control">
                         </div>
                         <div class="form-group">
-                        <label for="address">ที่อยู่</label>
+                            <label for="password" class="control-label">รหัสผ่าน (ปล่อยว่างถ้าไม่ต้องการเปลี่ยน)</label>
+                            <input type="password"
+                                v-model="form.password"
+                                class="form-control"
+                                id="password"
+                                placeholder="รหัสผ่าน"
+                                :class="{ 'is-invalid': form.errors.has('password') }"
+                            >
+                              <has-error :form="form" field="password"></has-error>
+                        </div>
+                        <div class="form-group">
+                        <label for="address" class="control-label">ที่อยู่</label>
                         <textarea class="form-control" v-model="form.address" rows="2" id="address" name="address" placeholder="ที่อยู่ ..."></textarea>
                       </div>
                       <div class="form-group">
-                            <label for="zipcode">รหัสไปรษณีย์</label>
+                            <label for="zipcode" class="control-label">รหัสไปรษณีย์</label>
                             <input type="text" v-model="form.zipcode" id="zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="location">ที่ตั้ง</label>
+                            <label for="location" class="control-label">ที่ตั้ง</label>
                             <input type="text" v-model="form.location" id="location" name="location" placeholder="ที่ตั้ง" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="area">พื้นที่</label>
+                            <label for="area" class="control-label">พื้นที่</label>
                             <input type="text" v-model="form.area" id="area" name="area" placeholder="พื้นที่" class="form-control">
                         </div>
                         <div class="form-group">
-                        <label for="image">ภาพโปรไฟล์</label>
-                        <div class="custom-file">
-                          <input type="file" @change="updateProfile" class="form-control" id="image" name="image">
-                          <div class="info-box">
-                            <div class="info-box-content">
-                                <img id='img-upload' src="" />
-                            </div>
-                            <span>ขนาดไฟล์ภาพไม่เกิน 2MB</span>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="image"></label>
-                            <button type="submit" @click.prevent="updateInfo" class="btn btn-block btn-primary">แก้ไขข้อมูล</button>
-                        </div>
-                        
-                  </div>
+                          <label for="photo" class="control-label">ภาพโปรไฟล์</label>
+                          <div class="col-sm-12">
+                              <input type="file" @change="updateProfile" name="photo"  class="form-input">
+                          </div>
+
+                      </div>
+                      <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-12">
+                          <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
+                          </div>
+                      </div>
                     </form>
                   </div>
                   <!-- /.tab-pane -->
@@ -163,11 +157,15 @@
                      zipcode:'',
                      location:'',
                      area:'',
-                     image:''
+                     photo:''
                  })    
             }
         },
         methods:{
+          getProfilePhoto(){
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;  
+                return photo;
+            },
             updateInfo(){
               this.$Progress.start();
                 this.form.put('api/profile/')
@@ -190,7 +188,7 @@
 
                   reader.onloadend =(file) =>{
                     
-                    this.form.image = reader.result;
+                    this.form.photo = reader.result;
 
                   }
                 }else{
@@ -213,41 +211,4 @@
           axios.get('api/profile').then(({ data }) => (this.form.fill(data)));  
         }
     }
-
-    $(document).ready( function() {
-        $(document).on('change', '.btn-file :file', function() {
-      var input = $(this),
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-      input.trigger('fileselect', [label]);
-		});
-
-		$('.btn-file :file').on('fileselect', function(event, label) {
-		    
-		    var input = $(this).parents('.input-group').find(':text'),
-		        log = label;
-		    
-		    if( input.length ) {
-		        input.val(log);
-		    } else {
-		        if( log ) alert(log);
-		    }
-	    
-		});
-		function readURL(input) {
-		    if (input.files && input.files[0]) {
-		        var reader = new FileReader();
-		        
-		        reader.onload = function (e) {
-                $('#img-upload').attr('src', e.target.result);
-                $('#profile-img').attr('src', e.target.result);
-		        }
-		        
-		        reader.readAsDataURL(input.files[0]);
-		    }
-		}
-
-		$("#image").change(function(){
-		    readURL(this);
-		}); 	
-	});
 </script>
