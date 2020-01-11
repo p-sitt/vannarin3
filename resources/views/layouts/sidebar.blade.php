@@ -131,21 +131,24 @@
               </p>
             </router-link>
           </li>
-           <li class="nav-item">
+           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fa-2x fas fa-cog"></i>
               <p>
                &nbsp  ตั้งค่า
               </p>
+              <i class="right fas fa-angle-left"></i>
             </a>
-          </li>
-          <li class="nav-item">
-            <router-link to="developer" class="nav-link">
-              <i class="fa-2x fas fa-cog"></i>
-              <p>
-                &nbsp Developer
-              </p>
-            </router-link>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="developer" class="nav-link">
+                  <i class="fas fa-cog"></i>
+                  <p>
+                    &nbsp Developer
+                  </p>
+                </router-link>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="dropdown-item nav-link" href="{{ route('logout') }}"

@@ -19301,7 +19301,7 @@ html.maximized-card {
 .widget-user .widget-user-image > img {
   border: 3px solid #ffffff;
   height: auto;
-  width: 90px;
+  width: 200px;
 }
 
 .widget-user .card-footer {

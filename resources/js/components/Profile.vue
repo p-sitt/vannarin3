@@ -42,7 +42,7 @@
                 <h5 class="widget-user-desc text-right">Web Designer</h5>
               </div>
               <div class="widget-user-image">
-                <img class="img-circle" src="user-profile.jpg" alt="User Avatar">
+                <img class="img-circle" id="profile-img" src="" alt="User Avatar">
               </div>
               <div class="card-footer">
                 <div class="row">
@@ -156,11 +156,12 @@
               form: new Form({
                      id:'',
                      name: '',
-                     type: '',
                      email: '',
                      password: '',
-                     location:'',
+                     type: '',
+                     address:'',
                      zipcode:'',
+                     location:'',
                      area:'',
                      image:''
                  })    
@@ -237,7 +238,8 @@
 		        var reader = new FileReader();
 		        
 		        reader.onload = function (e) {
-		            $('#img-upload').attr('src', e.target.result);
+                $('#img-upload').attr('src', e.target.result);
+                $('#profile-img').attr('src', e.target.result);
 		        }
 		        
 		        reader.readAsDataURL(input.files[0]);

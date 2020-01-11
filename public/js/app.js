@@ -2107,11 +2107,12 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: '',
         name: '',
-        type: '',
         email: '',
         password: '',
-        location: '',
+        type: '',
+        address: '',
         zipcode: '',
+        location: '',
         area: '',
         image: ''
       })
@@ -2187,6 +2188,7 @@ $(document).ready(function () {
 
       reader.onload = function (e) {
         $('#img-upload').attr('src', e.target.result);
+        $('#profile-img').attr('src', e.target.result);
       };
 
       reader.readAsDataURL(input.files[0]);
@@ -2209,6 +2211,7 @@ $(document).ready(function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -61456,7 +61459,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "widget-user-image" }, [
         _c("img", {
           staticClass: "img-circle",
-          attrs: { src: "user-profile.jpg", alt: "User Avatar" }
+          attrs: { id: "profile-img", src: "", alt: "User Avatar" }
         })
       ]),
       _vm._v(" "),
@@ -61576,7 +61579,7 @@ var render = function() {
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v("ตารางผู้ใช้งาน")]),
+            _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" }, [
               _c(
@@ -61598,7 +61601,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -61732,7 +61735,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _vm._m(2)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
@@ -61973,6 +61976,15 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title" }, [
+      _c("i", { staticClass: "fa-2x fas fa-users" }),
+      _vm._v("\n                   ตารางผู้ใช้งาน")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -79014,8 +79026,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/prasitkhamla/Documents/vannarin3/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\phpProject\vannarin3\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\phpProject\vannarin3\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
