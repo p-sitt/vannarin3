@@ -35,7 +35,7 @@
                         <td>{{user.id}}</td>
                         <td>{{user.name | upText}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{user.type}}</td>
+                        <td>{{user.type | upText}}</td>
                         <td>{{user.created_at | myDate}}</td>
                         <td> 
                           <a href="#" class="btn btn-primary" @click="editModal(user)">
@@ -139,11 +139,14 @@
                                 'ข้อมูลถูกแก้ไขแล้ว.',
                                 'success'
                                 )
-                    Fire.$emit('AfterCreate');
                     this.$Progress.finish();
+                    Fire.$emit('AfterCreate');
+                    
                 })
                 .catch(() => {
                     this.$Progress.fail();
+                    $('#addNew').modal('hide');
+                    Swal.fire('ไม่สำเร็จ!','คุณไม่มีสิทธิแก้ไขข้อมูลผู้ใช้','warning');
                 });
             },
             editModal(user){
@@ -180,7 +183,7 @@
                                 Fire.$emit('AfterCreate');
                             }
                         }).catch(()=>{
-                            swal('Failed!','There was somthing wrong.','warning');
+                             Swal.fire('ไม่สำเร็จ!','คุณไม่มีสิทธิลบข้อมูลผู้ใช้','warning');
                         });
                     }
                 })

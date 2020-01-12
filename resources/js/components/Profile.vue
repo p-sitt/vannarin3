@@ -30,24 +30,24 @@
                 <div class="row">
                   <div class="col-sm-4 border-right">
                     <div class="description-block">
-                      <h5 class="description-header">3,200</h5>
-                      <span class="description-text">SALES</span>
+                      <h5 class="description-header">{{this.form.location}}</h5>
+                      <span class="description-text">ที่ตั้ง</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4 border-right">
                     <div class="description-block">
-                      <h5 class="description-header">13,000</h5>
-                      <span class="description-text">FOLLOWERS</span>
+                      <h5 class="description-header">{{this.form.area}}</h5>
+                      <span class="description-text">เนื้อที่</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-4">
                     <div class="description-block">
-                      <h5 class="description-header">35</h5>
-                      <span class="description-text">PRODUCTS</span>
+                      <h5 class="description-header">{{this.form.zipcode}}</h5>
+                      <span class="description-text">รหัสไปรษณีย์</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -57,7 +57,6 @@
               </div>
             </div>
 
-           
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
@@ -74,7 +73,7 @@
                      <h4>ที่อยู่ : {{this.form.address}}</h4>
                      <h4>รหัสไปรษณีย์ : {{this.form.zipcode}}</h4>
                      <h4>ที่ตั้ง : {{this.form.location}}</h4>
-                     <h4>พื้นที่ : {{this.form.area}}</h4>
+                     <h4>เนื้อที่ : {{this.form.area}}  ไร่</h4>
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="settings">
@@ -111,8 +110,8 @@
                             <input type="text" v-model="form.location" id="location" name="location" placeholder="ที่ตั้ง" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="area" class="control-label">พื้นที่</label>
-                            <input type="text" v-model="form.area" id="area" name="area" placeholder="พื้นที่" class="form-control">
+                            <label for="area" class="control-label">เนื้อที่</label>
+                            <input type="text" v-model="form.area" id="area" name="area" placeholder="เนื้อที่" class="form-control">
                         </div>
                         <div class="form-group">
                           <label for="photo" class="control-label">ภาพโปรไฟล์</label>
@@ -163,14 +162,19 @@
         },
         methods:{
           getProfilePhoto(){
-                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;  
-                return photo;
+
+              let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
+              return photo;
+              
             },
             updateInfo(){
               this.$Progress.start();
+              if(this.form.password == ''){
+                    this.form.password = undefined;
+                }
                 this.form.put('api/profile/')
                 .then(()=>{
-
+                    Fire.$emit('AfterCreate');
                     this.$Progress.finish();
                 })
                 .catch(()=>{
@@ -178,27 +182,24 @@
                 });
             },
             updateProfile(e){
-                //console.log('Uploading')
+
                 let file = e.target.files[0];
-                console.log(file);
-
                 let reader = new FileReader();
+
+                let limit = 1024 * 1024 * 2;
                 
-                if(file['size'] < 2111775){
+                if(file['size'] > limit){
 
-                  reader.onloadend =(file) =>{
-                    
-                    this.form.photo = reader.result;
-
-                  }
-                }else{
-
-                   Swal.fire({
+                  Swal.fire({
                       type: 'error',
                       icon: 'warning',
                       title: 'Oops',
                       text: 'ไฟล์ภาพมีขนาดใหญ่เกินไป ขนาดภาพไม่ควรเกิน 2 MB',
                     })
+                    return false;
+                }
+                reader.onloadend =(file) =>{
+                  this.form.photo = reader.result;
                 }
                 reader.readAsDataURL(file);
             }

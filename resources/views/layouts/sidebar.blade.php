@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('/img/profile/'.Auth::user()->photo) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <router-link to="/profile" class="d-block"> {{ Auth::user()->name }} </router-link>
@@ -123,6 +123,7 @@
               </p>
             </router-link>
           </li>
+           @can('isAdmin')
           <li class="nav-item">
             <router-link to="/users" class="nav-link">
             <i class="fa-2x fas fa-users orange"></i>
@@ -150,6 +151,7 @@
               </li>
             </ul>
           </li>
+          @endcan
           <li class="nav-item">
             <a class="dropdown-item nav-link" href="{{ route('logout') }}"
               onclick="event.preventDefault();
