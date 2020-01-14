@@ -31,7 +31,7 @@ class CreatePlantsTable extends Migration
             $table->string('product_start')->nullable();
             $table->string('product_range')->nullable();
             $table->string('age')->nullable();
-            $table->string('comment')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-2x fas fa-users"></i>
-                    &nbsp  ตารางผู้ใช้งาน</h3>
+                    ตารางผู้ใช้งาน</h3>
                 <div class="card-tools">
                     <button class="btn btn-success" @click="newModal"> 
                         <i class="fas fa-user-plus fa-fw"></i> 

@@ -50,28 +50,16 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/plant-type/create" class="nav-link">
-                  <i class="fas fa-plus-square nav-icon cyan"></i>
-                  <p>&nbsp เพิ่มชนิดพืช</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/plant-type" class="nav-link ">
+                <router-link to="/planttype" class="nav-link ">
                   <i class="fas fa-file-alt nav-icon green"></i>
                   <p>&nbsp รายการชนิดพืช</p>
-                </a>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="/plant/create" class="nav-link">
-                  <i class="fas fa-plus-square nav-icon cyan"></i>
-                  <p>&nbsp เพิ่มข้อมูลพืช</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/plant" class="nav-link">
+                <router-link to="/plants" class="nav-link">
                   <i class="fas fa-file-alt nav-icon green"></i>
-                  <p>&nbsp แสดงข้อมูลพืชทั้งหมด</p>
-                </a>
+                  <p>&nbsp รายการพืชทั้งหมด</p>
+                </router-link>
               </li>
             </ul>
           </li>
@@ -102,13 +90,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/water" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-tools nav-icon cyan"></i>
                   <p>&nbsp ติดตั้งระบบ</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/waterstatus" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-file-alt nav-icon green"></i>
                   <p>&nbsp หน้าแสดงผล</p>
                 </a>

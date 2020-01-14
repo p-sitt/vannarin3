@@ -4,10 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Plant;
 use App\PlantType;
 
-class PlantController extends Controller
+class PlantTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,7 @@ class PlantController extends Controller
      */
     public function index()
     {
-        //$plants =  Plant::all();
-       // $planttype = PlantType::all();
-
-       // return Response::json(['plants' => $plants,'planttype' => $planttype]);
-
-        return Plant::all();
+        return PlantType::all();
     }
 
     /**
@@ -33,12 +27,13 @@ class PlantController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'type' => 'required|string|max:191',
             'name' => 'required|string|max:191'
         ]);
             
-        $input = $request->all();
-        return Plant::create($input);
+        return PlantType::create([
+
+            'name' => $request['name']
+        ]);
     }
 
     /**
@@ -59,15 +54,16 @@ class PlantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
+        
         $this->validate($request,[
             'name' => 'required|string|max:191'
         ]);
 
-        $plant = Plant::findOrFail($id);
+        $plantType = PlantType::findOrFail($id);
 
-        $plant->update($request->all());
+        $plantType->update($request->all());
 
         return ['message' => 'Update success'];
     }
@@ -80,10 +76,10 @@ class PlantController extends Controller
      */
     public function destroy($id)
     {
-        $plant = Plant::findOrFail($id);
+        $type = PlantType::findOrFail($id);
 
         //delete the user
-        $plant->delete();
+        $type->delete();
 
         return ['messege' => 'User Deleted'];
     }

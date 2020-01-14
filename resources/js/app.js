@@ -11,6 +11,10 @@ import moment from 'moment';
 import 'moment/locale/th';
 import { Form, HasError, AlertError } from 'vform';
 
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
@@ -27,9 +31,6 @@ const Toast = Swal.mixin({
   })
 window.Toast = Toast;
 
-window.Form = Form;
-Vue.component(HasError.name, HasError)
-Vue.component(AlertError.name, AlertError)
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -47,6 +48,7 @@ let routes = [
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/plants', component: require('./components/Plant.vue').default },
+    { path: '/planttype', component: require('./components/PlantType.vue').default },
   ]
 
 
